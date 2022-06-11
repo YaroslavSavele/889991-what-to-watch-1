@@ -1,0 +1,15 @@
+{
+  "name": "vendor_name/what_to_watch.loc",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Yaroslav",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+    "guzzlehttp/guzzle": "^7.4"
+  }
+}
