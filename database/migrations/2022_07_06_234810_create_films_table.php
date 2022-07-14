@@ -23,14 +23,12 @@ return new class extends Migration
             $table->string('video_link');
             $table->string('preview_video_link')->nullable();
             $table->text('description');
-            $table->float('rating')->nullable();
+            $table->decimal('rating', $precision = 3, $scale = 1)->nullable();
             $table->integer('scores_count')->default(0);
-            $table->string('director');
-            $table->text('starring')->nullable();
             $table->integer('run_time');
-            $table->string('genre')->nullable();
             $table->year('released');
-            $table->string('imdb')->unique();
+            $table->string('imdb_id')->unique();
+            $table->set('status', ['pending', 'on moderation', 'ready']);
             $table->softDeletes('deleted_at');
             $table->timestamps();
         });
