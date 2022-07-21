@@ -8,6 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class FilmUser extends Model
 {
     use HasFactory;
-
-    protected $table = 'film_user';
 }

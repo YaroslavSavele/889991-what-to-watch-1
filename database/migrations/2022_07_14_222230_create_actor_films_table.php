@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('film_genre', function (Blueprint $table) {
+        Schema::create('actor_films', function (Blueprint $table) {
             $table->id();
             $table->foreignId('film_id')->constrained();
-            $table->foreignId('genre_id')->constrained();
+            $table->foreignId('actor_id')->constrained();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('film_genre');
+        Schema::dropIfExists('actor_film');
     }
 };
