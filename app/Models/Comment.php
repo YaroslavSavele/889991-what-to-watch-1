@@ -28,4 +28,15 @@ class Comment extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function userName()
+    {
+        $userName = $this->user()->name;
+
+        if ($userName === null) {
+            return 'Anonymous';
+        }
+
+        return $userName;
+    }
 }

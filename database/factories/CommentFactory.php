@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Comment;
+use App\Models\Film;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -10,14 +13,20 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class CommentFactory extends Factory
 {
     /**
-     * Define the model's default state.
+     * The name of the factory's corresponding model.
      *
-     * @return array<string, mixed>
+     * @var string
      */
+    protected $model = Comment::class;
+
+
     public function definition()
     {
         return [
-            //
+            'text' => $this->faker->sentences(3, true),
+            'rating' => random_int(1, 10),
+            'user_id' => User::inRandomOrder()->first()->id,
+            'film_id' => Film::inRandomOrder()->first()->id,
         ];
     }
 }
