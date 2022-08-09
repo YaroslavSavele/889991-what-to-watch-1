@@ -33,4 +33,12 @@ class Film extends Model
     {
         return $this->belongsToMany(Genre::class);
     }
+
+    public function getRating()
+    {
+        $count = $this->comments()->count();
+        $sum = $this->comments()->sum('rating');
+
+        return $sum / $count;
+    }
 }

@@ -24,7 +24,7 @@ class CommentFactory extends Factory
     {
         return [
             'text' => $this->faker->sentences(3, true),
-            'rating' => random_int(1, 10),
+            'rating' => 5,
             'user_id' => User::inRandomOrder()->first()->id,
             'film_id' => Film::inRandomOrder()->first()->id,
         ];
