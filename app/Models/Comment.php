@@ -16,7 +16,9 @@ class Comment extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withDefault([
+            'name' => 'Anonymous',
+        ]);
     }
 
     public function comment()
@@ -27,5 +29,16 @@ class Comment extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function userName()
+    {
+        $userName = $this->user()->name();
+
+        if ($userName === null) {
+            return 'Anonymous';
+        }
+
+        return $userName;
     }
 }
