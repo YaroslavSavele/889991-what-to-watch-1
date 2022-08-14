@@ -14,6 +14,8 @@ class User extends Authenticatable
     use HasFactory;
     use Notifiable;
 
+    public const ROLE_USER = 0;
+    public const ROLE_MODERATOR = 1;
     /**
      * The attributes that are mass assignable.
      *
@@ -43,6 +45,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+//    private mixed $is_moderator;
 
     public function films()
     {
@@ -51,5 +54,10 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function isModerator()
+    {
+        return $this->is_moderator === self:: ROLE_MODERATOR;
     }
 }

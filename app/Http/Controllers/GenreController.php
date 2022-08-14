@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GenreUpdateRequest;
+use App\Models\Genre;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Support\Responsable;
+use Illuminate\Http\JsonResponse;
 
 class GenreController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse|Responsable
      */
     public function index()
     {
-        //
+        return $this->success(Genre::all());
     }
 
     /**
@@ -38,16 +42,11 @@ class GenreController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(GenreUpdateRequest $request, Genre $genre): \App\Http\Responses\Success
     {
-        //
+        $genre->update($request->validated());
+
+        return $this->success($genre->fresh());
     }
 
     /**
