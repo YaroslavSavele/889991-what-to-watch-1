@@ -29,7 +29,7 @@ class FilmFactory extends Factory
             'description' => $this->faker->text,
             'run_time' => random_int(10, 200),
             'released' => random_int(1932, 2022),
-            'imdb_id' => $this->faker->word,
+            'imdb_id' => $this->faker->unique()->word,
             'status' => $this->faker->randomElement(['pending','on moderation','ready']),
         ];
     }
