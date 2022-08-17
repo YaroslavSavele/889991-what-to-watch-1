@@ -9,6 +9,22 @@ class Film extends Model
 {
     use HasFactory;
 
+    protected $withCount = ['comments'];
+//    protected $with = ['genres'];
+
+    protected $fillable = [
+        'name',
+        'poster_image',
+        'preview_image',
+        'background_image',
+        'background_color',
+        'video_link',
+        'description',
+        'run_time',
+        'released',
+        'imdb_id',
+    ];
+
     public function comments()
     {
         return $this->hasMany(Comment::class);

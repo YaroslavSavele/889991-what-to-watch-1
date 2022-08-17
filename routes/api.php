@@ -29,19 +29,21 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //Route::get('/user/{id}', [UserController::class, 'show']);
 Route::patch('/user/{id}', [UserController::class, 'update'])->middleware('auth:sanctum');
-Route::get('/films', [FilmController::class, 'index']);
-Route::get('/films/{id}', [FilmController::class, 'show']);
+Route::get('/films', [FilmController::class, 'index'])->name('films.index');
+Route::get('/films/{film}', [FilmController::class, 'show'])->name('films.show');
 Route::post('/films', [FilmController::class, 'store']);
 Route::patch('/films/{id}', [FilmController::class, 'update']);
-Route::get('/genres', [GenreController::class, 'index']);
-Route::patch('/genres/{genre}', [GenreController::class, 'update']);
+Route::get('/genres', [GenreController::class, 'index'])->name('genres.index');
+Route::patch('/genres/{genre}', [GenreController::class, 'update'])->middleware('auth:sanctum')->name('genres.update');
 Route::get('/favorite', [FavoriteController::class, 'index'])->middleware('auth:sanctum');
 Route::post('films/{id}/favorite', [FavoriteController::class, 'store'])->middleware('auth:sanctum');
 Route::delete('films/{id}/favorite', [FavoriteController::class, 'destroy'])->middleware('auth:sanctum');
-Route::get('/films/{id}/comments', [CommentController::class, 'index']);
-Route::post('/films/{id}/comments', [CommentController::class, 'store'])->middleware('auth:sanctum');
+Route::get('/films/{film}/comments', [CommentController::class, 'index'])->name('comments.index');
+Route::post('/films/{film}/comments/{comment?}', [CommentController::class, 'store'])
+    ->middleware('auth:sanctum')->name('comments.store');
 Route::patch('/films/{id}/comments', [CommentController::class, 'update'])->middleware('auth:sanctum');
-Route::delete('/films/{id}/comments', [CommentController::class, 'destroy'])->middleware('auth:sanctum');
+Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])
+    ->middleware('auth:sanctum', 'can:moderator')->name('comments.destroy');
 Route::get('/films/{id}/similar', [FilmController::class, 'similar']);
 Route::get('/promo', [FilmController::class, 'getPromo']);
 Route::post('/promo/{id}', [FilmController::class, 'setPromo']);

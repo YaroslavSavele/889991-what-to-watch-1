@@ -35,6 +35,15 @@ class UserFactory extends Factory
         ];
     }
 
+    public function moderator()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'is_moderator' => User::ROLE_MODERATOR,
+            ];
+        });
+    }
+
     /**
      * Indicate that the model's email address should be unverified.
      *

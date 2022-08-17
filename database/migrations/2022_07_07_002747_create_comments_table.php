@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('rating')->nullable();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('film_id')->constrained()->onDelete('cascade');
-            $table->integer('comment_id')->nullable();
+            $table->unsignedBigInteger('parent_id')->constrained('comments')->nullable();
             $table->timestamps();
         });
     }

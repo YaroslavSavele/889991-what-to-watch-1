@@ -28,8 +28,8 @@ class FilmFactory extends Factory
             'video_link' => $this->faker->Url(),
             'description' => $this->faker->text,
             'run_time' => random_int(10, 200),
-            'released' => $this->faker->year,
-            'imdb_id' => $this->faker->word,
+            'released' => random_int(1932, 2022),
+            'imdb_id' => $this->faker->unique()->word,
             'status' => $this->faker->randomElement(['pending','on moderation','ready']),
         ];
     }

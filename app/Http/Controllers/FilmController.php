@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Film;
+use Illuminate\Contracts\Support\Responsable;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class FilmController extends Controller
@@ -9,11 +12,12 @@ class FilmController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return  JsonResponse|Responsable
+
      */
     public function index()
     {
-        //
+        return $this->paginate(Film::select(['id', 'name'])->paginate(8));
     }
 
     /**
@@ -33,9 +37,9 @@ class FilmController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Film $film)
     {
-        //
+        return $this->success($film);
     }
 
     /**

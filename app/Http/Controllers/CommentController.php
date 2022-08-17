@@ -2,29 +2,45 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CommentStoreRequest;
+use App\Models\Comment;
+use App\Models\Film;
+use Illuminate\Contracts\Support\Responsable;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse|Responsable
      */
-    public function index()
+    public function index(Film $film)
     {
-        //
+        return $this->success([
+            'count' => $film->comments_count,
+            'comments' => $film->comments,
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CommentStoreRequest $request
+     * @param Film $film
+     * @return JsonResponse|Responsable
      */
-    public function store(Request $request)
+    public function store(CommentStoreRequest $request, Film $film)
     {
-        //
+        $film->comments()->create([
+            'parent_id' => $request->comment,
+            'text' => $request->text,
+            'user_id' => Auth::id(),
+        ]);
+
+        return $this->success(null, 201);
     }
 
     /**
@@ -41,7 +57,7 @@ class CommentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -50,14 +66,11 @@ class CommentController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+
+    public function destroy(Comment $comment)
     {
-        //
+        $comment->delete();
+
+        return $this->success(null, 201);
     }
 }
