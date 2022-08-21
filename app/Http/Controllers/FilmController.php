@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddFilmRequest;
+use App\Jobs\AddFilm;
 use App\Models\Film;
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\JsonResponse;
@@ -26,9 +28,11 @@ class FilmController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AddFilmRequest $request)
     {
-        //
+        AddFilm::dispatch($request->imdb);
+
+        return $this->success(null, 201);
     }
 
     /**
@@ -41,6 +45,7 @@ class FilmController extends Controller
     {
         return $this->success($film);
     }
+
 
     /**
      * Update the specified resource in storage.

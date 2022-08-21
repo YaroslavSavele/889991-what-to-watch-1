@@ -20,13 +20,13 @@ return new class extends Migration
             $table->string('preview_image')->nullable();
             $table->string('background_image')->nullable();
             $table->string('background_color')->default('#ffffff');
-            $table->string('video_link');
+            $table->string('video_link')->nullable();
             $table->string('preview_video_link')->nullable();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->decimal('rating', $precision = 3, $scale = 1)->nullable();
             $table->integer('scores_count')->default(0);
-            $table->integer('run_time');
-            $table->year('released');
+            $table->integer('run_time')->nullable();
+            $table->year('released')->nullable();
             $table->string('imdb_id')->unique();
             $table->set('status', ['pending', 'on moderation', 'ready']);
             $table->softDeletes('deleted_at');

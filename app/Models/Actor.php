@@ -9,8 +9,12 @@ class Actor extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+    ];
+
     public function films()
     {
-        return $this->belongsToMany(Film::class);
+        return $this->belongsToMany(Film::class, 'actor_films');
     }
 }

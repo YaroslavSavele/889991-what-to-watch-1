@@ -49,7 +49,7 @@ class User extends Authenticatable
 
     public function films()
     {
-        return $this->belongsToMany(Film::class);
+        return $this->belongsToMany(Film::class, 'film_users');
     }
     public function comments()
     {
