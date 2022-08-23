@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Film extends Model
 {
@@ -23,6 +25,7 @@ class Film extends Model
         'run_time',
         'released',
         'imdb_id',
+        'status',
     ];
 
     public function comments()
@@ -32,22 +35,22 @@ class Film extends Model
 
     public function actors()
     {
-        return $this->belongsToMany(Actor::class);
+        return $this->belongsToMany(Actor::class, 'actor_films');
     }
 
     public function directors()
     {
-        return $this->belongsToMany(Director::class);
+        return $this->belongsToMany(Director::class, 'director_films');
     }
 
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'film_users');
     }
 
     public function genres()
     {
-        return $this->belongsToMany(Genre::class);
+        return $this->belongsToMany(Genre::class, 'film_genres');
     }
 
     public function getRating()
