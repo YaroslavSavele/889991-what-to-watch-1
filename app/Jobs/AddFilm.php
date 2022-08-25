@@ -38,11 +38,10 @@ class AddFilm implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
+    public function handle(InterfaceMovieRepository $repository)
     {
-        $movieRepository = new OmdRepository($this->imdbId);
         $movieInfoGetter = new MovieInfoGetter();
-        $info = $movieInfoGetter->getArrayInfo($movieRepository);
+        $info = $movieInfoGetter->getArrayInfo($repository->getMovie($this->imdbId));
         $data = $info[0];
 
         if ($data) {

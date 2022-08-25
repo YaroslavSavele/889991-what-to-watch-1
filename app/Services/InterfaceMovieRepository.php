@@ -4,5 +4,5 @@ namespace App\Services;
 
 interface InterfaceMovieRepository
 {
-    public function getMovie();
+    public function getMovie($imdbId);
 }
